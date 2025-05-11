@@ -111,7 +111,7 @@
                             return `<button onclick="edit(${data})" class="btn btn-warning btn-sm">
                                     <i class="fas fa-pencil"></i>
                                 </button>
-                                <button onclick="delete(${data})" class="btn btn-danger btn-sm">
+                                <button onclick="remove(${data})" class="btn btn-danger btn-sm">
                                     <i class="fas fa-trash"></i>
                                 </button>`;
                         }
@@ -184,6 +184,37 @@
                         $('#CategoryModal').modal('hide');
                     }
                 });
+            }
+
+            function remove(id) {
+                Swal.fire({
+                    title: 'Are you sure?',
+                    text: "You won't be able to revert this!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, remove it!'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $.ajax({
+                            url: '/category/delete/' + id,
+                            type: 'DELETE',
+                            data: {
+                                _token: '{{ csrf_token() }}'
+                            },
+                            success: function(response) {
+                                console.log(response);
+                                Swal.fire(
+                                    'Deleted!',
+                                    'Your file has been removed.',
+                                    'success'
+                                );
+                                table.ajax.reload();
+                            }
+                        });
+                    }
+                })
             }
 
             function clear() {

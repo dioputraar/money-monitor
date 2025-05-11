@@ -125,9 +125,6 @@
                         render: function(data, type, row) {
                             return `<button onclick="edit(${data})" class="btn btn-warning btn-sm">
                                     <i class="fas fa-pencil"></i>
-                                </button>
-                                <button onclick="delete(${data})" class="btn btn-danger btn-sm">
-                                    <i class="fas fa-trash"></i>
                                 </button>`;
                         }
                     }

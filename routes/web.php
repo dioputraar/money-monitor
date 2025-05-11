@@ -30,6 +30,7 @@ Route::middleware('auth')->group(function() {
         Route::get('/', [CategoryController::class, 'index']);
         Route::post('/', [CategoryController::class, 'upsert']);
         Route::get('/get/{id?}', [CategoryController::class, 'get'])->name('category.get');
+        Route::delete('/delete/{id}', [CategoryController::class, 'delete'])->name('category.delete');
     });
     Route::group(['prefix' => 'dashboard'], function () {
         Route::get('/', [DashboardController::class, 'index']);
